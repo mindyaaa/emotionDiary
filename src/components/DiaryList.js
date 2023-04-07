@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import MyButton from './MyButton';
 import { useNavigate } from 'react-router-dom';
+import DiaryItem from './DiaryItem';
 
 
 const sortOptionList = [
@@ -59,24 +60,32 @@ export default function DiaryList({diaryList}) {
 
     return (
         <div className='DiaryList'>
-            <ControlMenu 
-            value={sortType} 
-            onChange={setSortType}
-            optionList={sortOptionList}
-             />
 
-            <ControlMenu
-            value={filter}
-            onChange={setFilter}
-            optionList={filterOptionList}
-             />
+            <div className='menu_wrapper'>
+                <div className='left_col'>
+                    <ControlMenu 
+                    value={sortType} 
+                    onChange={setSortType}
+                    optionList={sortOptionList}
+                    />
 
-             <MyButton
-             text={'새로운 일기 쓰기'}
-             type={'positive'}
-             onClick={() => navigate('/new')}
-              />
-            {getProcessedDiaryList().map((item) => <h2 key={item.id}>{item.content} {item.emotion}</h2>)}
+                    <ControlMenu
+                    value={filter}
+                    onChange={setFilter}
+                    optionList={filterOptionList}
+                    />
+                </div>
+                <div className='right_col'>
+                    <MyButton
+                    text={'새로운 일기 쓰기'}
+                    type={'positive'}
+                    onClick={() => navigate('/new')}
+                    />
+                </div>
+            </div>
+
+            {getProcessedDiaryList().map((item) => 
+                <DiaryItem key={item.id} {...item} />)}
         
         </div>
     );
