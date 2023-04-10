@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import DiaryEditor from '../components/DiaryEditor';
+
 
 export default function New() {
     return (
         <div>
-            <p>이곳은 NEW 입니다</p>
+            <DiaryEditor />
         </div>
     );
 }

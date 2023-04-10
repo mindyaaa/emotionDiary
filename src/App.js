@@ -7,13 +7,13 @@ import New from './pages/New';
 import Diary from './pages/Diary';
 
 const reducer = (state, action) => {
-  const newState =[];
+  let newState =[];
 
   switch(action.type) {
     case 'INIT' : return action.data;
 
     case 'CREATE' : {
-      newState = [...state, action.data];
+      newState = [action.data, ...state];
       return newState;
       break;
     };
@@ -38,7 +38,7 @@ export const DiaryStateContext = React.createContext();
 export const DiaryDispatchContext = React.createContext();
 
 
-const dummyData = [
+let dummyData = [
   {
     id:1,
     emotion:1,
@@ -83,10 +83,10 @@ function App() {
 
   const onCreate = (date, emotion, content) => {
     dispatch({type:'CREATE', data:{
-      id: dataId,
-      emotion,
+      id: dataId.current,
+      date: new Date(date).getTime(),
       content,
-      date: new Date(date).getTime()
+      emotion,
     }})
     dataId.current +=1 ;
   }
@@ -120,7 +120,7 @@ function App() {
                 <Route path='/' element={<Home />}/>
                 <Route path='/diary/:id' element={<Diary />}/>
                 <Route path='/new' element={<New />}/>
-                <Route path='/edit' element={<Edit />}/>
+                <Route path='/edit/:id' element={<Edit />}/>
               </Routes>
             </div>
         </BrowserRouter>
