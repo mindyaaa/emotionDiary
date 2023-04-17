@@ -18,13 +18,16 @@ export default function Home() {
                 curDate.getFullYear(),
                 curDate.getMonth(),
                 1
-            );
+            ).getTime();
     
             const lastDate = new Date(
                 curDate.getFullYear(),
                 curDate.getMonth()+1,
-                0
-            );
+                0,
+                23,
+                59,
+                59
+            ).getTime();
     
             setData(diaryList.filter((item) => item.date >= firstDate && item.date < lastDate))
         }

@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
@@ -32,52 +32,53 @@ const reducer = (state, action) => {
 
     default : return state;
   }
+
+  return newState;
 }
 
 export const DiaryStateContext = React.createContext();
 export const DiaryDispatchContext = React.createContext();
 
 
-let dummyData = [
-  {
-    id:1,
-    emotion:1,
-    content:'Monday',
-    date:1680759906162
-  },
-  {
-    id:2,
-    emotion:2,
-    content:'Tuesday',
-    date:1680759906163
-  },
-  {
-    id:3,
-    emotion:3,
-    content:'Wednesday',
-    date:1680759906164
-  },
-  {
-    id:4,
-    emotion:4,
-    content:'Thursday',
-    date:1680759906165
-  },
-  {
-    id:5,
-    emotion:5,
-    content:'Friday',
-    date:1680759906166
-  }
-]
+// let dummyData = [
+//   {
+//     id:1,
+//     emotion:1,
+//     content:'Monday',
+//     date:1680759906162
+//   },
+//   {
+//     id:2,
+//     emotion:2,
+//     content:'Tuesday',
+//     date:1680759906163
+//   },
+//   {
+//     id:3,
+//     emotion:3,
+//     content:'Wednesday',
+//     date:1680759906164
+//   },
+//   {
+//     id:4,
+//     emotion:4,
+//     content:'Thursday',
+//     date:1680759906165
+//   },
+//   {
+//     id:5,
+//     emotion:5,
+//     content:'Friday',
+//     date:1680759906166
+//   }
+// ]
 
 
 function App() {
 
-  console.log(new Date().getTime());
 
-  const [data, dispatch] = useReducer(reducer, dummyData);
-  const dataId = useRef(0);
+  const [data, dispatch] = useReducer(reducer, []);
+  const dataId = useRef(6);
 
   //CREATE
 
